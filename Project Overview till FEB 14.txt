@@ -1,0 +1,43 @@
+📌 Project Overview
+Your project bridges the communication gap between deaf/mute individuals and those unfamiliar with sign language. It does so by:
+✔ Recognizing hand signs in real-time using Mediapipe
+✔ Converting detected hand signs into speech (Hand Sign to Audio)
+✔ Converting spoken words into corresponding hand signs (Audio to Hand Sign)
+✔ Forming complete sentences from multiple detected hand signs
+✔ Optimizing gesture speed adaptation for smoother recognition
+
+✅ Features You Have Implemented
+
+
+1️⃣ Hand Sign to Audio Conversion
+Uses Mediapipe for real-time hand keypoint detection
+Classifies the detected hand gesture into pre-trained hand signs
+Speaks out the detected hand sign using pyttsx3
+Implements sentence formation to make communication more natural
+Allows manual control over announcements (toggle ON/OFF using a key).
+
+2️⃣ Audio to Hand Sign Conversion
+Uses SpeechRecognition (Google API/Vosk) to recognize spoken words
+Matches the recognized words with a predefined dictionary of hand signs
+Displays the corresponding hand sign images using Tkinter (GUI).
+
+3️⃣ Gesture Speed Adaptation
+Tracks hand movement speed to adjust confidence thresholds dynamically
+Prevents false positives when the hand is moving too fast or too slow
+
+4️⃣ Sentence Formation
+Groups multiple detected hand signs into coherent sentences
+Implements manual sentence stopping (pressing a key to finalize a sentence)
+Allows clearing the buffer to avoid unintended hand signs being added
+
+5️⃣ Optimizations for Realism
+Confidence thresholding prevents misclassification of hand signs
+Frame rate improvements for smoother detection in OpenCV
+Manual toggle (A key) for enabling/disabling announcements
+
+📌 Next Steps & Improvements
+🔹 Running the project on Google Colab (for GPU acceleration)
+🔹 Expanding the sign language vocabulary (e.g., adding ASL gestures)
+🔹 Improving accuracy with custom-trained hand sign models
+🔹 Enhancing GUI for better user interaction (e.g., making Tkinter more interactive)
+🔹 Adding support for multiple languages in speech-to-sign conversion

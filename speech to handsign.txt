@@ -1,0 +1,92 @@
+*The script for audio to handsign conversion is saved in "audio_to_handsign.py"
+
+How It Works
+
+> Speech Recognition:
+The program listens for audio input using speech_recognition.
+Converts recognized speech into lowercase text for matching.
+
+> Mapping and Display:
+Matches the recognized text with the hand_sign_mapping dictionary.
+Displays the corresponding hand sign image in a Tkinter window.
+
+> Error Handling:
+Handles cases where no audio is detected or the text doesn’t match any hand sign.
+---------------------------------------------------------------------------------------------------------
+
+(I)Libraries and Tools required: 1.speech recognition, 2.pillow, 3.Tkinter
+
+1.Speech Recognition:
+*Use the speech_recognition library to convert voice input into text.
+*It supports multiple speech-to-text engines, including Google’s Speech Recognition API.
+
+2.Tkinter:
+*Use Tkinter to create a Graphical User Interface (GUI) for displaying the hand signs.
+*The GUI can show static images, animations, or videos of the corresponding hand signs.
+
+3.Media Playback:
+*For displaying hand signs, use the Pillow library for images or tkinter's canvas/video capabilities.
+
+4. PyAudio(dependent with speechrecognition library, often pre-installed with sr but not in my case, i had to install)
+
+----------------------------------------------------------------------------------------------------------
+(II)WORKFLOW:
+
+1.Capture audio input using a microphone.
+2.Convert the audio into text using a speech recognition library.
+3.Map the recognized text to predefined hand signs.
+4.Display the hand signs visually using animations, images, or videos.
+----------------------------------------------------------------------------------------------------------
+
+(III)Setting folder directory:
+*Project Folder/Images/____.png
+
+project-folder/
+├── images/
+│   ├── stop.png
+│   ├── close.png
+│   ├── up.png
+│   ├── super.png
+│   ├── peace.png
+├── audio_to_hand_sign.py
+
+-----------------------------------------------------------------------------------------------------
+
+(IV) Integrating the Speech Recognition and GUI with main script of project(app.py)
+
+(i) Import the Required Functions:
+"from audio_to_hand_sign import audio_to_hand_sign" in 'app.py'
+
+(ii) Add a Mode or Trigger:
+Since your 'app.py' currently processes hand signs for audio conversion, you need a way to switch between the two functionalities:
+
+Add a mode toggle to switch between:
+*Handsign-to-Audio Mode
+*Audio-to-Handsign Mode
+(Update the "select_mode" function to include a new mode in the code)
+
+"def select_mode(key, mode):
+    number = -1
+    if 48 <= key <= 57:  # 0 ~ 9
+        number = key - 48
+    if key == 110:  # n for Handsign to Audio
+        mode = 0
+    if key == 107:  # k for Audio to Handsign
+        mode = 1
+    return number, mode"
+
+(iii) Modify the main Function
+Update the main function to call the appropriate feature based on the selected mode.
+
+(iv) Update audio_to_hand_sign.py
+Ensure your audio_to_hand_sign.py script has no blocking loops, so it can return control to the main loop in app.py after execution.
+
+(v) Handle potential clashes when integrating it with 'app.py'.
+
+
+
+https://github.com/openai/whisper
+
+------------------------------------------------------------------------------------------------
+
+(achieved the objective by Jan 18th, 2025)

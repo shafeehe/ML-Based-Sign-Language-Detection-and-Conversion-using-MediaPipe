@@ -1,0 +1,91 @@
+Progess after the 1st interim presentation(22/01/2025):
+
+
+
+--> Added the confidence threshold feature.
+	* set a default value for min. confidence threshold. if it doesn't meet min.threshold, displays "UNKNOWN" but doesn't announce (modified the code to announce except the"UNKNOWN").
+
+-------------------------------------------------------------------------------------
+
+--> Gesture Speed Adaptation & Tracking:
+	🔹 To make the system responsive to different signing speeds, we can implement **gesture velocity tracking** using Mediapipe keypoints:
+		✔ The system will detect signing speed and dynamically adjust the confidence threshold.
+		✔ Faster gestures require a higher confidence threshold, reducing false positives.
+		✔ Slower gestures allow a lower confidence threshold, making detection more flexible.
+
+	🔹 How It Works:
+		Track the position of key landmarks (e.g., wrist, fingers) over time.
+			Calculate speed based on distance moved per frame.(Euclidean Distance formula)
+			Adjust confidence thresholds or frame capture rate dynamically based on speed.(slow,normal,fast)
+
+	🔹Steps:
+		 1️⃣Add the function "(calculate_speed())" at the top of app.py.
+		2️⃣ Initialize variables "(prev_landmark, prev_time)" inside main().
+		3️⃣ Modify the "if results.multi_hand_landmarks is not None:" loop to track speed and adjust confidence dynamically.
+		4️⃣ Run "app.py" and observe speed values & confidence adjustments in the terminal.
+
+------------------------------------------------------------------------------------------------------------
+
+--> Sentence formation using buffer:
+
+1️⃣ Add sign_sentence buffer at the beginning of main().
+2️⃣ Modify gesture recognition to store words in the buffer.
+3️⃣ Add logic to announce full sentences after a delay of 3 seconds.
+4️⃣ Run app.py and test by signing multiple words (e.g., "Hello", "How", "Are", "You").
+
+Explanation:
+1. Initialization Outside the Loop:
+The sentence buffer (sign_sentence), last_sign_time, and sentence_delay are defined before entering the loop so they persist across frames.
+
+2. Inside the Hand Processing Loop:
+When a confident sign is detected, it is added to the sign_sentence buffer. The last_sign_time is updated each time a new word is added.
+
+3. After the Detection Block:
+After processing all hand landmarks for the current frame (and before calling process_mode or drawing the screen), we check:
+
+"...if time.time() - last_sign_time > sentence_delay and len(sign_sentence) > 0:   ..."
+
+If no new sign has been added for sentence_delay seconds (3 seconds here), we form a sentence by joining the words in the buffer and announce it using sign_to_audio(). Then we clear the buffer.
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+--> Added the display of sentence buffer on the OpenCV window using cv.PutText and assigned a key 'c' to clear the sentence buffer.
+
+--> added toggling ON/OFF for TTS announcement
+
+05/03/25
+
+-->added video and GIF mapping for the "audio_to_handsign.py" (experimented with the "we love you gesture).
+-->improved UI tkinter window, more user friendly, added 'exit', 'play' and 'pause' buttons & background.
+------------------------------------------------------------------------------------------
+-->installed the imagio library package :Used for reading and writing images in various formats, including PNG, JPEG, GIF, and even videos.
+
+--> installed "pynput" python library:
+		The pynput library in Python is used for controlling and monitoring input devices like the keyboard and mouse. It allows you to simulate key presses, mouse clicks, and track user input in real time.
+
+🔹 Common Uses of pynput
+✅ Automating Keyboard Input – Simulating key presses and typing text programmatically.
+✅ Automating Mouse Actions – Moving the cursor, clicking, and scrolling automatically.
+✅ Listening to Keyboard and Mouse Events – Detecting when a user presses a key or clicks a mouse button.
+-------------------------------------------------------------------------------------------
+
+-->Trained the system with American Sign Language(ASL) by recognizing the hand gestures and announcing them.
+
+-->Use a Two-Key Combination for logging keypoints of Class IDs upto 99:
+
+	* This solution allows you to log up to 100 unique gestures (class IDs 0–99) by pressing two keys in sequence (e.g., 1 + 0 for class ID 10).
+	* Benefits of This Solution
+		Scalability: You can log up to 100 gestures using two-key combinations.
+
+		Flexibility: You can easily extend this to support more gestures if needed.
+
+		Simplicity: The changes are minimal and do not require external files or complex logic.
+
+--> The total number of sentences that can be formed by the '15 ASL gestures' that I customly trained is approx. '4000' sentences!
+(Open, Close, where is, OK, I, want, you, to eat, give, what, is your name, I'm sorry, why, how, need help)
+
+
+
+
+

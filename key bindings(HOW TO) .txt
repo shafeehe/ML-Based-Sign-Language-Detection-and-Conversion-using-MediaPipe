@@ -1,0 +1,25 @@
+k --> to log the keypoints
+h --> to log the point history
+n --> Toggle audio to handsign conversion mode
+pressing 0 to 9 (Class IDs) --> to assign the keypoints to certain hand landmarks
+
+
+
+####Gathering Dataset and Training custom Hand Gesture Models#####
+
+
+> press k to log the keypoints of custom hand gesture in different scenarios and under varying conditions.
+> press the corresponding class ID(0 to 9) assigned in the 'key_point_classifier_label,csv'. 
+  Eg: peace--class ID = 4
+      hello--class ID = 0
+
+[NB: To train more than 10 hand gestures:_______________________]
+
+>open the '.ipynb'(jupyter notebook file) file and modify the "NUM CLASSES=__" and run the script to start training the model.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+c --> to clear the sentence buffer
+s --> to terminate creating sentences
+a --> to toggle TTS announcement
+	

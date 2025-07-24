@@ -1,0 +1,12 @@
+Re-enabling 'point history classification' for dynamic hand gesture recognition
+
+>In the 'main fxn loop' of app.py, at the #Hand sign classification part:
+
+"...
+if hand_sign_id == 'qwe':  # Point gesture
+                    point_history.append(landmark_list[8])
+                else:
+                    point_history.append([0, 0]) #when no finger movement detected
+..."
+
+>replacing 'qwe' with 'None'.  ---> enables the 'point history classification' feature.
